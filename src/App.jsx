@@ -30,11 +30,62 @@ const MainContent = styled.main`
   grid-template-columns: 250px 1fr;
   gap: 3rem;
   width: 100%;
+  position: relative;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: ${({ showSidebar }) => showSidebar ? '250px 1fr' : '1fr'};
     padding: 1rem;
     gap: 2rem;
+  }
+`;
+
+const SidebarToggleButton = styled.button`
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 123, 255, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  display: none;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: rgba(0, 123, 255, 1);
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+    right: 0.75rem;
+  }
+`;
+
+const SidebarOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  display: ${({ isVisible }) => isVisible ? 'block' : 'none'};
+
+  @media (min-width: 769px) {
+    display: none;
   }
 `;
 
@@ -51,6 +102,7 @@ const HomePage = () => {
   } = useStore();
 
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleCartClick = () => {
     setIsCartOpen(true);
@@ -64,6 +116,10 @@ const HomePage = () => {
     setIsCartOpen(false);
   };
 
+  const handleSidebarToggle = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <AppContainer>
       <Header
@@ -74,10 +130,11 @@ const HomePage = () => {
 
       <HeroBanner />
 
-      <MainContent className="container">
+      <MainContent className="container" showSidebar={isSidebarOpen}>
         <Sidebar
           filters={filters}
           onFilterChange={updateFilter}
+          isVisible={isSidebarOpen}
         />
 
         <ProductGrid
@@ -85,6 +142,15 @@ const HomePage = () => {
           onAddToCart={addToCart}
         />
       </MainContent>
+
+      <SidebarToggleButton onClick={handleSidebarToggle}>
+        {isSidebarOpen ? '→' : '←'}
+      </SidebarToggleButton>
+
+      <SidebarOverlay
+        isVisible={isSidebarOpen}
+        onClick={() => setIsSidebarOpen(false)}
+      />
 
       <Footer />
 

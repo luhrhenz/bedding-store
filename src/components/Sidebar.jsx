@@ -17,10 +17,15 @@ const SidebarContainer = styled.aside`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
-    position: static;
-    margin-bottom: 2rem;
-    padding: 1rem;
+    position: fixed;
+    top: 120px;
+    left: ${({ isVisible }) => isVisible ? '0' : '-280px'};
+    width: 250px;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    z-index: 45;
+    transition: left 0.3s ease;
+    box-shadow: ${({ isVisible }) => isVisible ? '2px 0 10px rgba(0, 0, 0, 0.1)' : 'none'};
   }
 `;
 
@@ -58,7 +63,7 @@ const PriceValues = styled.div`
   color: #666;
 `;
 
-const Sidebar = ({ filters, onFilterChange }) => {
+const Sidebar = ({ filters, onFilterChange, isVisible = true }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleCategoryChange = (e) => {
@@ -82,6 +87,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
     <SidebarContainer
       aria-label="Filters"
       isActive={isActive}
+      isVisible={isVisible}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

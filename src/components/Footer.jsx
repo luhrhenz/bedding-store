@@ -15,6 +15,12 @@ const FooterGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
 `;
 
 const FooterSection = styled.div``;
@@ -56,6 +62,11 @@ const NewsletterText = styled.i`
 const NewsletterForm = styled.form`
   display: flex;
   gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 `;
 
 const NewsletterInput = styled.input`
@@ -74,9 +85,15 @@ const NewsletterButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
+  white-space: nowrap;
 
   &:hover {
     background: #0056b3;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
   }
 `;
 

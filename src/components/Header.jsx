@@ -150,14 +150,99 @@ const CartCount = styled.span`
   justify-content: center;
 `;
 
+const SearchButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #666;
+
+  &:hover {
+    color: #007bff;
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+`;
+
+const SearchModal = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  z-index: 1000;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+
+  @media (min-width: 601px) {
+    display: none;
+  }
+`;
+
+const SearchModalInput = styled.input`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
 const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
     onSearchChange(value);
   };
+
+  const handleSearchButtonClick = () => {
+    setIsSearchModalOpen(!isSearchModalOpen);
+  };
+
+  const handleModalSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    onSearchChange(value);
+  };
+
+  const handleModalClose = () => {
+    setIsSearchModalOpen(false);
+  };
+
+  // Close modal when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isSearchModalOpen && !event.target.closest('.search-modal') && !event.target.closest('.search-button')) {
+        setIsSearchModalOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSearchModalOpen]);
 
   return (
     <HeaderContainer>
@@ -188,12 +273,24 @@ const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
             />
           </SearchIcon>
         </SearchWrapper>
+        <SearchButton className="search-button" onClick={handleSearchButtonClick} aria-label="Open search">
+          🔍
+        </SearchButton>
         <CartButton onClick={onCartClick} aria-label="Open cart">
           🛒
           {cartItemCount > 0 && (
             <CartCount>{cartItemCount}</CartCount>
           )}
         </CartButton>
+        <SearchModal className="search-modal" isOpen={isSearchModalOpen}>
+          <SearchModalInput
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={handleModalSearchChange}
+            autoFocus
+          />
+        </SearchModal>
       </HeaderInner>
     </HeaderContainer>
   );
