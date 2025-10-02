@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const FooterContainer = styled.footer`
   background: #f8f9fa;
   margin-top: 4rem;
-  padding: 3rem 0 1rem;
+  padding: 1rem 0 1rem;
 `;
 
 const FooterGrid = styled.div`
@@ -17,17 +17,32 @@ const FooterGrid = styled.div`
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0 1rem;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
   }
 `;
 
 const FooterSection = styled.div``;
 
+const BrandName = styled.span`
+  display: flex;
+  flex-direction: column;
+  color: #4f46e5;
+  font-weight: bold;
+  font-size: 1.2em;
+  font-family: cursive;
+  
+`;
+const BrandList = styled.span`
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  
+`;
+
 const FooterTitle = styled.h3`
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 `;
 
 const FooterText = styled.p`
@@ -49,6 +64,11 @@ const FooterList = styled.div`
       color: #007bff;
     }
   }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0.5rem;
+  }  
 `;
 
 const Newsletter = styled.div``;
@@ -141,8 +161,8 @@ const Footer = () => {
     <FooterContainer id="footer">
       <FooterGrid>
         <FooterSection className="about">
-          <FooterTitle>Mama Chisom Beddings Store</FooterTitle>
-          <FooterText>Luxury bedding for the perfect night's sleep.</FooterText>
+          <BrandName>MamaChisom Beddings Store</BrandName>
+          <BrandList>Luxury bedding for the perfect night's sleep.</BrandList>
         </FooterSection>
 
         <FooterSection className="shop-list">
