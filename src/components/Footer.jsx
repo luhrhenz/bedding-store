@@ -96,7 +96,7 @@ const FooterBottom = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     text-align: center;
   }
 `;
