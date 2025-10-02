@@ -34,7 +34,7 @@ const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   color: blue;
-  font-family: poppins, cursive;
+  font-family: cursive;
 
   a {
     text-decoration: none;
