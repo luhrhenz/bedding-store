@@ -34,6 +34,8 @@ const BrandName = styled.span`
   
 `;
 const BrandList = styled.span`
+  font-weight: bold;
+  font-style: italic;
   color: #666;
   line-height: 1.6;
   margin-bottom: 1rem;
