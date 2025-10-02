@@ -78,6 +78,66 @@ const Nav = styled.nav`
   }
 `;
 
+const MobileMenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #666;
+
+  &:hover {
+    color: #007bff;
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+  }
+`;
+
+const MobileDropdown = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  z-index: 1000;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  min-width: 150px;
+
+  @media (min-width: 601px) {
+    display: none;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+    border-bottom: 1px solid #f0f0f0;
+
+    &:hover {
+      color: #007bff;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+`;
+
 const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -209,6 +269,7 @@ const SearchModalInput = styled.input`
 const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -230,11 +291,22 @@ const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
     setIsSearchModalOpen(false);
   };
 
-  // Close modal when clicking outside
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleMobileMenuClose = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  // Close modals when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       if (isSearchModalOpen && !event.target.closest('.search-modal') && !event.target.closest('.search-button')) {
         setIsSearchModalOpen(false);
+      }
+      if (isMobileMenuOpen && !event.target.closest('.mobile-dropdown') && !event.target.closest('.mobile-menu-button')) {
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -242,7 +314,7 @@ const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isSearchModalOpen]);
+  }, [isSearchModalOpen, isMobileMenuOpen]);
 
   return (
     <HeaderContainer>
@@ -255,6 +327,14 @@ const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
           <Link to="/#footer">About</Link>
           <Link to="/contact">Contact</Link>
         </Nav>
+        <MobileMenuButton className="mobile-menu-button" onClick={handleMobileMenuToggle} aria-label="Toggle mobile menu">
+          ☰
+        </MobileMenuButton>
+        <MobileDropdown className="mobile-dropdown" isOpen={isMobileMenuOpen}>
+          <Link to="/" onClick={handleMobileMenuClose}>Home</Link>
+          <Link to="/#footer" onClick={handleMobileMenuClose}>About</Link>
+          <Link to="/contact" onClick={handleMobileMenuClose}>Contact</Link>
+        </MobileDropdown>
         <SearchWrapper>
           <SearchInput
             type="text"

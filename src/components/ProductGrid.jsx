@@ -9,6 +9,8 @@ const ProductsSection = styled.section`
   gap: 2rem;
   padding: 2rem 0;
   align-items: start;
+  width: 100%;
+  min-width: 0; /* Prevent grid overflow */
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
@@ -17,6 +19,7 @@ const ProductsSection = styled.section`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    padding: 1rem 0;
   }
 `;
 

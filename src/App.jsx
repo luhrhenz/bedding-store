@@ -33,10 +33,10 @@ const MainContent = styled.main`
   position: relative;
 
   @media (max-width: 768px) {
-    grid-template-columns: ${({ showSidebar }) => showSidebar ? '250px 1fr' : '0px 1fr'};
+    grid-template-columns: ${({ showSidebar }) => showSidebar ? '250px 1fr' : '1fr'};
     padding: 1rem;
     gap: 2rem;
-    transition: grid-template-columns 0.3s ease;
+    transition: none; /* Remove transition to prevent layout issues */
   }
 `;
 
@@ -67,17 +67,9 @@ const SidebarToggleButton = styled.button`
     transform: translateY(-50%) scale(0.95);
   }
 
+  /* Hide on mobile as requested */
   @media (max-width: 768px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (max-width: 480px) {
-    width: 45px;
-    height: 45px;
-    font-size: 1rem;
-    right: 0.5rem;
+    display: none;
   }
 `;
 
@@ -110,7 +102,17 @@ const HomePage = () => {
   } = useStore();
 
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
+
+  // Handle window resize to show/hide sidebar appropriately
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsSidebarOpen(window.innerWidth > 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleCartClick = () => {
     setIsCartOpen(true);

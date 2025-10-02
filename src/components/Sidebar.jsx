@@ -27,6 +27,7 @@ const SidebarContainer = styled.aside`
     transition: left 0.3s ease;
     box-shadow: ${({ isVisible }) => isVisible ? '2px 0 10px rgba(0, 0, 0, 0.1)' : 'none'};
     padding-top: 120px; /* Account for header height */
+    pointer-events: ${({ isVisible }) => isVisible ? 'auto' : 'none'};
   }
 `;
 
