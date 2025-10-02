@@ -102,13 +102,16 @@ const HomePage = () => {
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<HomePage />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<HomePage />} />
+        </Routes>
+      </Router>
+      <ScrollButton />
+    </>
   );
 };
 
