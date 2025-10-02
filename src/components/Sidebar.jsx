@@ -15,6 +15,13 @@ const SidebarContainer = styled.aside`
     position: sticky;
     top: 120px;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: static;
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
 `;
 
 const FilterGroup = styled.div`

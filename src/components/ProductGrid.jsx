@@ -35,6 +35,14 @@ const ProductCard = styled.article`
     transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 768px) {
+    height: 400px;
+  }
+
+  @media (max-width: 480px) {
+    height: 350px;
+  }
 `;
 
 const ProductImageContainer = styled.div`
@@ -66,6 +74,14 @@ const ImagePlaceholder = styled.div`
 const ProductContent = styled.div`
   padding: 1.5rem;
   flex: 1;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+  }
 `;
 
 const ProductCategory = styled.div`
@@ -102,6 +118,12 @@ const ProductFooter = styled.div`
   align-items: center;
   gap: 1rem;
   padding-top: 1rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
 `;
 
 const ProductPrice = styled.span`
@@ -120,9 +142,16 @@ const AddToCartBtn = styled.button`
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s;
+  white-space: nowrap;
 
   &:hover {
     background: #0056b3;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
   }
 `;
 

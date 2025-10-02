@@ -63,4 +63,25 @@ textarea:focus {
   .container {
     padding: 0 0.5rem;
   }
+
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+
+  /* Improve touch targets on mobile */
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
+
+  /* Better text readability on small screens */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+  }
 }

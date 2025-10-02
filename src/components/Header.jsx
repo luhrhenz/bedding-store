@@ -18,6 +18,16 @@ const HeaderInner = styled.div`
   padding: 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+  }
 `;
 
 const Logo = styled.div`
@@ -29,6 +39,14 @@ const Logo = styled.div`
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
   }
 `;
 
@@ -46,6 +64,18 @@ const Nav = styled.nav`
       color: #007bff;
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+
+    a {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const SearchWrapper = styled.div`
@@ -55,6 +85,15 @@ const SearchWrapper = styled.div`
   flex: 1;
   max-width: 400px;
   margin: 0 2rem;
+
+  @media (max-width: 768px) {
+    max-width: 250px;
+    margin: 0 1rem;
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -90,6 +129,10 @@ const CartButton = styled.button`
   font-size: 1.25rem;
   cursor: pointer;
   position: relative;
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const CartCount = styled.span`
