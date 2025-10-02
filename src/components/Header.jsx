@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 
 
 const HeaderContainer = styled.header`
@@ -120,12 +120,12 @@ const Header = ({ cartItemCount, onCartClick, onSearchChange }) => {
     <HeaderContainer>
       <HeaderInner>
         <Logo>
-          <a href="/">MamaChisom Beddings Store.</a>
+          <Link to="/">MamaChisom Beddings Store.</Link>
         </Logo>
         <Nav>
-          <a href="/">Home</a>
-          <a href="/#footer">About</a>
-          <a href="/contact">Contact</a>
+          <Link to="/">Home</Link>
+          <Link to="/#footer">About</Link>
+          <Link to="/contact">Contact</Link>
         </Nav>
         <SearchWrapper>
           <SearchInput
