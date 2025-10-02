@@ -18,14 +18,15 @@ const SidebarContainer = styled.aside`
 
   @media (max-width: 768px) {
     position: fixed;
-    top: 120px;
+    top: 0;
     left: ${({ isVisible }) => isVisible ? '0' : '-280px'};
-    width: 250px;
-    height: calc(100vh - 140px);
+    width: 280px;
+    height: 100vh;
     overflow-y: auto;
     z-index: 45;
     transition: left 0.3s ease;
     box-shadow: ${({ isVisible }) => isVisible ? '2px 0 10px rgba(0, 0, 0, 0.1)' : 'none'};
+    padding-top: 120px; /* Account for header height */
   }
 `;
 
@@ -76,11 +77,27 @@ const Sidebar = ({ filters, onFilterChange, isVisible = true }) => {
   };
 
   const handleMouseEnter = () => {
-    setIsActive(true);
+    if (window.innerWidth > 768) {
+      setIsActive(true);
+    }
   };
 
   const handleMouseLeave = () => {
-    setIsActive(false);
+    if (window.innerWidth > 768) {
+      setIsActive(false);
+    }
+  };
+
+  const handleTouchStart = () => {
+    if (window.innerWidth <= 768) {
+      setIsActive(true);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (window.innerWidth <= 768) {
+      setIsActive(false);
+    }
   };
 
   return (
@@ -90,6 +107,8 @@ const Sidebar = ({ filters, onFilterChange, isVisible = true }) => {
       isVisible={isVisible}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <FilterGroup>
         <h3>Category</h3>

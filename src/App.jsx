@@ -33,9 +33,10 @@ const MainContent = styled.main`
   position: relative;
 
   @media (max-width: 768px) {
-    grid-template-columns: ${({ showSidebar }) => showSidebar ? '250px 1fr' : '1fr'};
+    grid-template-columns: ${({ showSidebar }) => showSidebar ? '250px 1fr' : '0px 1fr'};
     padding: 1rem;
     gap: 2rem;
+    transition: grid-template-columns 0.3s ease;
   }
 `;
 
@@ -55,9 +56,15 @@ const SidebarToggleButton = styled.button`
   z-index: 50;
   display: none;
   font-size: 1.2rem;
+  transition: all 0.3s ease;
 
   &:hover {
     background: rgba(0, 123, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
   }
 
   @media (max-width: 768px) {
@@ -70,7 +77,7 @@ const SidebarToggleButton = styled.button`
     width: 45px;
     height: 45px;
     font-size: 1rem;
-    right: 0.75rem;
+    right: 0.5rem;
   }
 `;
 
@@ -83,6 +90,7 @@ const SidebarOverlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   z-index: 40;
   display: ${({ isVisible }) => isVisible ? 'block' : 'none'};
+  cursor: pointer;
 
   @media (min-width: 769px) {
     display: none;
