@@ -23,7 +23,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: 'Simple Duvet- Complete Set',
-    description: 'Soft, lightweight duvet set crafted for everyday comfort and easy care. Includes duvet and matching pillowcases for a cozy night’s sleep.',
+    description: 'Soft, lightweight duvet set crafted for everyday comfort and easy care.',
     price: 49000.99,
     category: 'duvets',
     color: 'blue',
