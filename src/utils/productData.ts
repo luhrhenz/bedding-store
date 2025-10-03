@@ -23,7 +23,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: 'Simple Duvet- Complete Set',
-    description: 'Pure silk pillowcases that reduce friction and prevent hair breakage.',
+    description: 'Soft, lightweight duvet set crafted for everyday comfort and easy care. Includes duvet and matching pillowcases for a cozy night’s sleep.',
     price: 49000.99,
     category: 'duvets',
     color: 'blue',
